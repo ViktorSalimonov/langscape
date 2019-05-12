@@ -17,8 +17,8 @@ class MemberInline(admin.StackedInline):
 class UserAdmin(BaseUserAdmin):
     inlines = (MemberInline, )
 
+
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
-
 
 admin.site.register(Article)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -28,3 +29,5 @@ class Article(TimeStampedModel):
     difficulty = models.CharField(max_length=3,
                                   choices=DIFFICULTY_CHOICES,
                                   default=DIFFICULTY_ANY)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    text = models.TextField()

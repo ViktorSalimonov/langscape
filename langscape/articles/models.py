@@ -13,6 +13,11 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
+class Member(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_gold = models.BooleanField(default=False)
+
+
 class Article(TimeStampedModel):
     DIFFICULTY_ANY = 'any'
     DIFFICULTY_BEGINNER = 'beg'
@@ -29,5 +34,5 @@ class Article(TimeStampedModel):
     difficulty = models.CharField(max_length=3,
                                   choices=DIFFICULTY_CHOICES,
                                   default=DIFFICULTY_ANY)
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
     text = models.TextField()

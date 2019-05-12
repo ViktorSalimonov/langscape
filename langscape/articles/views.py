@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView
 
 from .models import Article
+from .utils import check_member_rights
 
 
 class ArticleListView(ListView):
@@ -22,3 +23,8 @@ class ArticleUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('articles:detail', kwargs={'pk': self.object.pk})
+
+    def dispatch(self, request, *args, **kwargs):
+        request = check_member_rights(request)
+        return super(ArticleUpdateView, self).dispatch(
+                                                    request, *args, **kwargs)

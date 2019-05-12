@@ -1,8 +1,24 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.views.generic.base import TemplateView
+from django.urls import reverse
+from django.views.generic import ListView, DetailView, UpdateView
+
+from .models import Article
 
 
-class IndexView(TemplateView):
-    template_name = "index.html"
+class ArticleListView(ListView):
+    model = Article
+
+
+class ArticleDetailView(DetailView):
+    model = Article
+
+
+class ArticleUpdateView(UpdateView):
+    model = Article
+    fields = ['title', 'difficulty', 'text']
+    template_name_suffix = '_update_form'
+
+    def get_success_url(self):
+        return reverse('articles:detail', kwargs={'pk': self.object.pk})

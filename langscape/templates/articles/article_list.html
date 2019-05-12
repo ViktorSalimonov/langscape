@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Articles</h1>
+    <ul>
+        {% for article in object_list %}
+            <h2>{{ article.title }}</h2>
+            <li>{{ article.created }}</li>
+            <li>{{ article.get_difficulty_display }}</li>
+            <li>{{ article.author }}</li>
+            <p>{{ article.text }}</p>
+        {% endfor %}
+    </ul>
+{% endblock content %}

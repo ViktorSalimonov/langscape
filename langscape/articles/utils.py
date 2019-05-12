@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied
 
 
 def check_member_rights(request):
-    if request.user.member.is_gold:
+    if request.user.member.is_gold or request.user.is_stuff:
         request.is_gold = True
         return request
 

@@ -8,6 +8,9 @@
             <small>
                 (<a href="{% url 'articles:update' article.pk %}">update</a>)
             </small>
+            <small>
+                (<a href="{% url 'articles:delete' article.pk %}">delete</a>)
+            </small>
             </li>
         {% endfor %}
     </ul>

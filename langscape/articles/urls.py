@@ -12,4 +12,7 @@ urlpatterns = [
     url(regex=r'^(?P<pk>\d+)/update/$',
         view=views.ArticleUpdateView.as_view(),
         name='update'),
+    url(regex=r'^(?P<pk>\d+)/delete/$',
+        view=views.ArticleDeleteView.as_view(),
+        name='delete'),
 ]

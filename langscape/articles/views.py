@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .models import Article
 from .utils import check_member_rights
@@ -15,6 +16,17 @@ class ArticleListView(ListView):
 
 class ArticleDetailView(DetailView):
     model = Article
+
+
+class ArticleCreateView(LoginRequiredMixin, CreateView):
+    model = Article
+    fields = ['title', 'difficulty', 'text']
+
+    def form_valid(self, form):
+        return super(ArticleCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('articles:list')
 
 
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):

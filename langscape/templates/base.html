@@ -1,4 +1,17 @@
 <h1>langscape</h1>
-
+You have logged in as: {{ user.username }}
 {% block content %}
 {% endblock content %}
+
+{% if messages %}
+Messages:
+<ul class="messages">
+    {% for message in messages %}
+    <li id="message_{{ forloop.counter }}"
+        {% if message.tanges %} class="{{ message.tags }}"
+            {% endif %}>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}

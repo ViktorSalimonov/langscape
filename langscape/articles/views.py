@@ -33,18 +33,19 @@ class ArticleDetailView(DetailView):
 
 class ArticleCreateView(LoginRequiredMixin, ArticleActionMixin, CreateView):
     model = Article
-    success_msg = "Aricle is created!"
+    success_msg = "Article is created!"
     success_url = reverse_lazy('articles:list')
 
 
 class ArticleUpdateView(LoginRequiredMixin, ArticleActionMixin, UpdateView):
     model = Article
-    success_msg = "Aricle is updated!"
+    success_msg = "Article is updated!"
     success_url = reverse_lazy('articles:list')
 
 
 class ArticleDeleteView(DeleteView):
     model = Article
+    success_msg = "Article is deleted!"
     success_url = reverse_lazy('articles:list')
 
     def dispatch(self, request, *args, **kwargs):

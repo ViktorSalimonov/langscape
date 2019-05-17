@@ -1,4 +1,4 @@
-<h1>langscape</h1>
+<h1>LangScape</h1>
 You have logged in as: {{ user.username }}
 {% block content %}
 {% endblock content %}
@@ -8,7 +8,7 @@ Messages:
 <ul class="messages">
     {% for message in messages %}
     <li id="message_{{ forloop.counter }}"
-        {% if message.tanges %} class="{{ message.tags }}"
+        {% if message.tags %} class="{{ message.tags }}"
             {% endif %}>
         {{ message }}
     </li>

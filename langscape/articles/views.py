@@ -47,6 +47,8 @@ class ArticleCreateView(LoginRequiredMixin, ArticleActionMixin, CreateView):
 
 
 class ArticleUpdateView(LoginRequiredMixin, ArticleActionMixin, UpdateView):
+    model = Article
+    form_class = ArticleForm
     success_msg = "Article is updated!"
     success_url = reverse_lazy('articles:list')
 

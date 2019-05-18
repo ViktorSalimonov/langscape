@@ -26,6 +26,18 @@ class ArticleActionMixin(object):
 class ArticleListView(ListView):
     model = Article
 
+    def get_queryset(self):
+        # Fetch the queryset
+        queryset = super(ArticleListView, self).get_queryset()
+        
+        # Get the q GET parameter
+        q = self.request.GET.get("q")
+        if q:
+            # Return filtered queryset
+            return queryset.filter(title__icontains=q)
+        # Return the queryset
+        return queryset
+
 
 class ArticleDetailView(DetailView):
     model = Article

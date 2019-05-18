@@ -12,6 +12,8 @@ from .utils import check_member_rights
 
 
 class ArticleActionMixin(object):
+
+    model = Article
     fields = ['title', 'difficulty', 'text']
 
     @property
@@ -40,13 +42,11 @@ class ArticleDetailView(DetailView):
 
 
 class ArticleCreateView(LoginRequiredMixin, ArticleActionMixin, CreateView):
-    model = Article
     success_msg = "Article is created!"
     success_url = reverse_lazy('articles:list')
 
 
 class ArticleUpdateView(LoginRequiredMixin, ArticleActionMixin, UpdateView):
-    model = Article
     success_msg = "Article is updated!"
     success_url = reverse_lazy('articles:list')
 

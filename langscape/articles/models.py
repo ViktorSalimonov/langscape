@@ -5,10 +5,19 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 
+from .validators import validate_article
+
 
 class TimeStampedModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+
+
+class TitleAbstractModel(models.Model):
+    title = models.CharField(max_length=255, validators=[validate_article])
 
     class Meta:
         abstract = True
@@ -19,7 +28,7 @@ class Member(models.Model):
     is_gold = models.BooleanField(default=False)
 
 
-class Article(TimeStampedModel):
+class Article(TitleAbstractModel, TimeStampedModel):
     DIFFICULTY_ANY = 'any'
     DIFFICULTY_BEGINNER = 'beg'
     DIFFICULTY_MEDIUM = 'med'
@@ -31,7 +40,6 @@ class Article(TimeStampedModel):
         (DIFFICULTY_MEDIUM, 'Medium'),
         (DIFFICULTY_ADVANCED, 'Advanced')
     )
-    title = models.CharField(max_length=200)
     difficulty = models.CharField(max_length=3,
                                   choices=DIFFICULTY_CHOICES,
                                   default=DIFFICULTY_ANY)

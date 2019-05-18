@@ -7,14 +7,12 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic import CreateView, UpdateView, DeleteView
 
+from .forms import ArticleForm
 from .models import Article
 from .utils import check_member_rights
 
 
 class ArticleActionMixin(object):
-
-    model = Article
-    fields = ['title', 'difficulty', 'text']
 
     @property
     def success_msg(self):
@@ -42,6 +40,8 @@ class ArticleDetailView(DetailView):
 
 
 class ArticleCreateView(LoginRequiredMixin, ArticleActionMixin, CreateView):
+    model = Article
+    form_class = ArticleForm
     success_msg = "Article is created!"
     success_url = reverse_lazy('articles:list')
 

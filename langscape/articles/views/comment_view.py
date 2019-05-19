@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView
 
 from ..forms import CommentForm
-from ..models import Article, Comment
+from ..models import Article, Comment, Member
 
 
 class CommentActionMixin(object):
@@ -34,6 +34,8 @@ class CommentCreateView(LoginRequiredMixin, CommentActionMixin, CreateView):
     def form_valid(self, form):
         form.instance.article = get_object_or_404(Article,
                                                   pk=self.kwargs['pk'])
+        form.instance.author = get_object_or_404(Member,
+                                                 pk=self.request.user.id)
         return super(CommentCreateView, self).form_valid(form)
 
 

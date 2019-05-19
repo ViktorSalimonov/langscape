@@ -16,7 +16,7 @@ class TimeStampedModel(models.Model):
 
 class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    is_gold = models.BooleanField(default=False)
+    editor = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.user.username
@@ -48,10 +48,11 @@ class Article(TimeStampedModel):
         return self.title
 
 
-class Comment(models.Model):
+class Comment(TimeStampedModel):
     article = models.ForeignKey(Article,
                                 on_delete=models.CASCADE,
                                 related_name="comments")
+    author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
     content = models.TextField()
 
     def __unicode__(self):

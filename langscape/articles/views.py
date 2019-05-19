@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .forms import ArticleForm
-from .models import Article
+from .models import Article, Comment
 from .utils import check_member_rights
 
 
@@ -37,6 +37,12 @@ class ArticleListView(ListView):
 
 class ArticleDetailView(DetailView):
     model = Article
+
+    def get_context_data(self, **kwargs):
+        article = self.object
+        context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        context['comments'] = Comment.objects.all().filter(pk=article.id)
+        return context
 
 
 class ArticleCreateView(LoginRequiredMixin, ArticleActionMixin, CreateView):

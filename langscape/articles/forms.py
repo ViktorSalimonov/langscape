@@ -17,5 +17,5 @@ class ArticleForm(forms.ModelForm):
         fields = (
             'title',
             'difficulty',
-            'text'
+            'body'
         )

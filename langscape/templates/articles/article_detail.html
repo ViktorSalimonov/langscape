@@ -5,5 +5,11 @@
     <p>{{ object.created }}</p>
     <p>{{ object.get_difficulty_display }}</p>
     <p>{{ object.author }}</p>
-    <p>{{ object.text }}</p>
+    <p>{{ object.body }}</p>
+    <hr>
+    
+    {% for comment in comments %}
+        <p>{{ comment.body }}</p>
+    {% endfor %}
+        
 {% endblock content %}

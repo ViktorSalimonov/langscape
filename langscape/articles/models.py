@@ -36,7 +36,12 @@ class Article(TimeStampedModel):
                                   choices=DIFFICULTY_CHOICES,
                                   default=DIFFICULTY_ANY)
     author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
-    text = models.TextField()
+    body = models.TextField()
 
     def get_absolute_url(self):
         return reverse('articles:detail', kwargs={'pk': self.objects.pk})
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    body = models.TextField()

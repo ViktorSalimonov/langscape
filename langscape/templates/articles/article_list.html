@@ -2,9 +2,10 @@
 
 {% block content %}
     <h1>Articles</h1>
-    <ul>
-        {% for article in object_list %}
-            <li><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></li>
-        {% endfor %}
-    </ul>
+    Search article: {% include "articles/_article_search.html" %}
+    {% for article in object_list %}
+    <h2><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></h2>
+    Written by {{ article.author }} at {{ article.created }}
+    <hr>
+    {% endfor %}
 {% endblock content %}

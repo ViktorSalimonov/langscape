@@ -1,8 +1,11 @@
 <h1>LangScape</h1>
 
-You have logged in as: {{ user.username }}
 
-{% include "articles/_article_search.html" %}
+{% if user.is_authenticated %}
+    Hello, {{ user.username }}!
+{% else %}
+    Hello, guest!
+{% endif %}
 
 {% block content %}
 {% endblock content %}

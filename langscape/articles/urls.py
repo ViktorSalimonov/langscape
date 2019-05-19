@@ -1,18 +1,18 @@
 from django.conf.urls import url
 
-from . import views
+from views import article_view, comment_view
 
 urlpatterns = [
     # url(regex=r'',
     #     view=views.ArticleDashboardView.as_view(),
     #     name='dashboard'),
     url(regex=r'^$',
-        view=views.ArticleListView.as_view(),
+        view=article_view.ArticleListView.as_view(),
         name="list"),
     url(regex=r'^(?P<pk>\d+)/$',
-        view=views.ArticleDetailView.as_view(),
+        view=article_view.ArticleDetailView.as_view(),
         name='detail'),
     url(regex=r'^(?P<pk>\d+)/comment/$',
-        view=views.CommentCreateView.as_view(),
+        view=comment_view.CommentCreateView.as_view(),
         name='add_comment'),
 ]

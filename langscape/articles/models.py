@@ -18,6 +18,9 @@ class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_gold = models.BooleanField(default=False)
 
+    def __unicode__(self):
+        return self.user.username
+
 
 class Article(TimeStampedModel):
     DIFFICULTY_ANY = 'any'
@@ -36,12 +39,20 @@ class Article(TimeStampedModel):
                                   choices=DIFFICULTY_CHOICES,
                                   default=DIFFICULTY_ANY)
     author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
-    body = models.TextField()
+    content = models.TextField()
 
     def get_absolute_url(self):
         return reverse('articles:detail', kwargs={'pk': self.objects.pk})
 
+    def __unicode__(self):
+        return self.title
+
 
 class Comment(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    body = models.TextField()
+    article = models.ForeignKey(Article,
+                                on_delete=models.CASCADE,
+                                related_name="comments")
+    content = models.TextField()
+
+    def __unicode__(self):
+        return self.content

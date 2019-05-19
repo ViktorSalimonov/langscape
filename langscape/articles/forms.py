@@ -3,19 +3,17 @@ from __future__ import unicode_literals
 
 from django import forms
 
-from .models import Article
-from .validators import validate_article
+from .models import Comment
+from .validators import validate_comment
 
 
-class ArticleForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(ArticleForm, self).__init__(*args, **kwargs)
-        self.fields['title'].validators.append(validate_article)
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['content'].validators.append(validate_comment)
 
     class Meta:
-        model = Article
+        model = Comment
         fields = (
-            'title',
-            'difficulty',
-            'body'
+            'content',
         )

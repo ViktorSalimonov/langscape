@@ -5,11 +5,14 @@
     <p>{{ object.created }}</p>
     <p>{{ object.get_difficulty_display }}</p>
     <p>{{ object.author }}</p>
-    <p>{{ object.body }}</p>
+    <p>{{ object.content }}</p>
     <hr>
-    
-    {% for comment in comments %}
-        <p>{{ comment.body }}</p>
-    {% endfor %}
-        
+
+    <h3>Comments:</h3>
+    <a href="{% url 'articles:add_comment' pk=object.id %}">Leave a comment</a>
+    <ul>
+        {% for comment in comments %}
+            <li>{{ comment.content }}</li>
+        {% endfor %}
+    </ul>
 {% endblock content %}

@@ -2,17 +2,9 @@
 
 {% block content %}
     <h1>Articles</h1>
-    <a href="{% url 'articles:create' %}">create</a>
     <ul>
         {% for article in object_list %}
-            <li><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a>
-            <small>
-                (<a href="{% url 'articles:update' article.pk %}">update</a>)
-            </small>
-            <small>
-                (<a href="{% url 'articles:delete' article.pk %}">delete</a>)
-            </small>
-            </li>
+            <li><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></li>
         {% endfor %}
     </ul>
 {% endblock content %}

@@ -1,24 +1,37 @@
-<h1>LangScape</h1>
+{% load staticfiles %}
+<html>
+    <head>
+        <title>
+            {% block title %}LangScape{% endblock title %}
+        </title>
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css"
+                  href="{% static 'css/main.css' %}">
+        {% endblock stylesheets %}
+    </head>
+    <body>
+        <div class="content">
+            {% block content %}
+                <h1>LangScape</h1>
+                {% if user.is_authenticated %}
+                    Hello, {{ user.username }}!
+                {% else %}
+                    Hello, guest!
+                {% endif %}
 
-
-{% if user.is_authenticated %}
-    Hello, {{ user.username }}!
-{% else %}
-    Hello, guest!
-{% endif %}
-
-{% block content %}
-{% endblock content %}
-
-{% if messages %}
-Messages:
-<ul class="messages">
-    {% for message in messages %}
-    <li id="message_{{ forloop.counter }}"
-        {% if message.tags %} class="{{ message.tags }}"
-            {% endif %}>
-        {{ message }}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
+                {% if messages %}
+                Messages:
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li id="message_{{ forloop.counter }}"
+                        {% if message.tags %} class="{{ message.tags }}"
+                            {% endif %}>
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>

@@ -11,8 +11,11 @@
     <h3>Comments:</h3>
     <a href="{% url 'articles:add_comment' pk=article.id %}">Leave a comment</a>
     {% for comment in comments %}
-            <p>{{ comment.content }}</p>
+            <p>{{ comment.content }}</p> 
             <i>by {{ comment.author}} at {{ comment.created }}</i>
+            {% if user.member.editor %}
+                <a href="{% url 'articles:delete_comment' pk=comment.id %}">delete</a>
+            {% endif %}
         {% endfor %}
     <ul>
         

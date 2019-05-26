@@ -15,4 +15,7 @@ urlpatterns = [
     url(regex=r'^(?P<pk>\d+)/comment/$',
         view=comment_view.CommentCreateView.as_view(),
         name='add_comment'),
+    url(regex=r'^(?P<pk>\d+)/comment/delete$',
+        view=comment_view.CommentDeleteView.as_view(),
+        name='delete_comment'),
 ]

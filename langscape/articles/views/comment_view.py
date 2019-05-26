@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView
 
 from ..forms import CommentForm
 from ..models import Article, Comment, Member
@@ -46,7 +46,10 @@ class CommentCreateView(LoginRequiredMixin, CommentActionMixin, CreateView):
 #     success_url = reverse_lazy('articles:list')
 
 
-# class CommentDeleteView(DeleteView, CommentActionMixin, UpdateView):
-#     model = Article
-#     success_msg = "Comment is deleted!"
-#     success_url = reverse_lazy('articles:list')
+class CommentDeleteView(DeleteView, CommentActionMixin):
+    model = Comment
+    success_msg = "Comment is deleted!"
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('articles:detail',
+                            kwargs={'pk': self.object.article.id})

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import uuid as uuid_lib
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -34,6 +35,10 @@ class Article(TimeStampedModel):
         (DIFFICULTY_MEDIUM, 'Medium'),
         (DIFFICULTY_ADVANCED, 'Advanced')
     )
+    uuid = models.UUIDField(
+        db_index=True,
+        default=uuid_lib.uuid4,
+        editable=False)
     title = models.CharField(max_length=255)
     difficulty = models.CharField(max_length=3,
                                   choices=DIFFICULTY_CHOICES,

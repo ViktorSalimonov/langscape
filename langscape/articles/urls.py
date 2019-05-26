@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from rest_framework import routers
 
-from .api.views import ArticleListAPIView
+from ..api.views import ArticleListAPIView
 from views import article_view, comment_view
 
 router = routers.DefaultRouter()

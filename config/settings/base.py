@@ -5,6 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 
 
 with open('config/settings/secrets.json') as file:
@@ -100,5 +101,10 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(ROOT_DIR, 'langscape', 'static'),
+)
+
+STATIC_ROOT = os.path.join(ROOT_DIR, 'langscape', 'staticfiles')

@@ -1,11 +1,6 @@
-from django.conf.urls import include, url
-from rest_framework import routers
+from django.conf.urls import url
 
-from ..api.views import ArticleListAPIView
 from views import article_view, comment_view
-
-router = routers.DefaultRouter()
-router.register(r'articles', ArticleListAPIView)
 
 
 urlpatterns = [
@@ -24,6 +19,4 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/comment/delete$',
         comment_view.CommentDeleteView.as_view(),
         name='delete_comment'),
-    url('api/',
-        include(router.urls)),
 ]

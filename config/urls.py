@@ -9,7 +9,7 @@ router = routers.DefaultRouter()
 router.register(r'articles', ArticleListAPIView)
 
 urlpatterns = [
-    url(r'^articles/',
+    url(r'',
         include('langscape.articles.urls', namespace='articles')),
     url(r'^about/',
         TemplateView.as_view(template_name="about.html")),

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{ article.title }}</h1>
-    <small><a href="{% url 'articles:list' %}">Back to articles list</a></small>
+    <h2>{{ article.title }}</h2>
+    <a href="{% url 'articles:list' %}">Back to articles list</a>
     <p>Written by {{ article.author }} at {{ article.created }}</p>
     <p>Difficulty: {{ article.get_difficulty_display }}</p>
     <p>{{ article.content }}</p>
@@ -11,13 +11,10 @@
     <h3>Comments:</h3>
     <a href="{% url 'articles:add_comment' pk=article.id %}">Leave a comment</a>
     {% for comment in comments %}
-            <p>{{ comment.content }}</p> 
-            <i>by {{ comment.author}} at {{ comment.created }}</i>
-            {% if user.member.editor %}
-                <a href="{% url 'articles:delete_comment' pk=comment.id %}">delete</a>
-            {% endif %}
-        {% endfor %}
-    <ul>
-        
-    </ul>
+        <p>{{ comment.content }}</p>
+        <i>by {{ comment.author}} at {{ comment.created }}</i>
+        {% if user.member.editor %}
+            <a href="{% url 'articles:delete_comment' pk=comment.id %}">delete</a>
+        {% endif %}
+    {% endfor %}
 {% endblock content %}

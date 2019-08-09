@@ -1,0 +1,8 @@
+{% block search %}
+    <form action="{% url 'articles:list' %}" method="GET">
+        <label>
+            <input type="text" name="q">
+        </label>
+        <button type="submit">search</button>
+    </form>
+{% endblock search %}

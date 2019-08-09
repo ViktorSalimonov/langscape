@@ -1,67 +1,19 @@
 {% load staticfiles %}
-<html>
+
+<html lang="en">
     <head>
         <title>
             {% block title %}LangScape{% endblock title %}
         </title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css">
-            <link rel="stylesheet" href="{% static 'css/main.css' %}">
-        {% endblock stylesheets %}
     </head>
     <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">LangScape</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button> 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/articles">Articles<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0" action="{% url 'articles:list' %}" method="GET">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search article" aria-label="Search" name="q">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-        </div>
-    </nav>
-    <main role="main">
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1 class="jumbotron-heading">LangScape</h1>
-            </div>
-        </section>
-            {% block content %}
-                {% if user.is_authenticated %}
-                    Hello, {{ user.username }}!
-                {% else %}
-                    Hello, guest!
-                {% endif %}
-
-                {% if messages %}
-                Messages:
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li id="message_{{ forloop.counter }}"
-                        {% if message.tags %} class="{{ message.tags }}"
-                            {% endif %}>
-                        {{ message }}
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            {% endblock content %}
-        </div>
-    </main>
-    <footer class="container">
-            <p>salv</p>
-          </footer>
+        <h1>LangScape</h1>
+        {% block content %}
+            {% if user.is_authenticated %}
+                Hello, {{ user.username }}!
+            {% else %}
+                Hello, guest!
+            {% endif %}
+        {% endblock content %}
     </body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>

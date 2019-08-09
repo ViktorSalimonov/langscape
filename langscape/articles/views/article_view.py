@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.views.generic import ListView, DetailView
 
-from ..models import Article, Comment
+from langscape.articles.models import Article, Comment
 
 
 class ArticleListView(ListView):
@@ -11,7 +8,6 @@ class ArticleListView(ListView):
 
     def get_queryset(self):
         queryset = super(ArticleListView, self).get_queryset()
-
         q = self.request.GET.get("q")
         if q:
             return queryset.filter(title__icontains=q)

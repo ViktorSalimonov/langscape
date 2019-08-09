@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..articles.models import Article
+from langscape.articles.models import Article
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -13,5 +13,5 @@ class ArticleSerializer(serializers.ModelSerializer):
             'created',
             'difficulty',
             'author',
-            'content'
+            'content',
         )

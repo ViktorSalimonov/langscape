@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import uuid as uuid_lib
 
 from django.contrib.auth.models import User
@@ -35,14 +33,9 @@ class Article(TimeStampedModel):
         (DIFFICULTY_MEDIUM, 'Medium'),
         (DIFFICULTY_ADVANCED, 'Advanced')
     )
-    uuid = models.UUIDField(
-        db_index=True,
-        default=uuid_lib.uuid4,
-        editable=False)
+    uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
     title = models.CharField(max_length=255)
-    difficulty = models.CharField(max_length=3,
-                                  choices=DIFFICULTY_CHOICES,
-                                  default=DIFFICULTY_ANY)
+    difficulty = models.CharField(max_length=3, choices=DIFFICULTY_CHOICES, default=DIFFICULTY_ANY)
     author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
     content = models.TextField()
 
@@ -54,9 +47,7 @@ class Article(TimeStampedModel):
 
 
 class Comment(TimeStampedModel):
-    article = models.ForeignKey(Article,
-                                on_delete=models.CASCADE,
-                                related_name="comments")
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
     content = models.TextField()
 

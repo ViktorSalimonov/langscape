@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django import forms
 
-from .models import Comment
-from .validators import validate_comment
+from langscape.articles.models import Comment
+from langscape.articles.validators import validate_comment
 
 
 class CommentForm(forms.ModelForm):

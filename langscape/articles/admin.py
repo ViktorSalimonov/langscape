@@ -1,11 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from .models import Article, Comment, Member
+from langscape.articles.models import Article, Comment, Member
 
 
 class MemberInline(admin.StackedInline):
@@ -15,7 +12,7 @@ class MemberInline(admin.StackedInline):
 
 
 class UserAdmin(BaseUserAdmin):
-    inlines = (MemberInline, )
+    inlines = (MemberInline,)
 
 
 admin.site.unregister(User)

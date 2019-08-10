@@ -13,9 +13,21 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
-class Member(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    editor = models.BooleanField(default=False)
+class UserProfile(models.Model):
+    """Custom user model."""
+
+    __TEACHER = 'tch'
+    __STUDENT = 'std'
+    __GUEST = 'gst'
+
+    ROLE_CHOICES = (
+        (__TEACHER, 'Teacher'),
+        (__STUDENT, 'Student'),
+        (__GUEST, 'Guest'),
+    )
+
+    user = models.OneToOneField(User, related_name="userprofile", on_delete=models.CASCADE)
+    role = models.CharField(max_length=3, choices=ROLE_CHOICES, default=__GUEST)
 
     def __unicode__(self):
         return self.user.username
@@ -36,7 +48,7 @@ class Article(TimeStampedModel):
     uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
     title = models.CharField(max_length=255)
     difficulty = models.CharField(max_length=3, choices=DIFFICULTY_CHOICES, default=__DIFFICULTY_ANY)
-    author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
     content = models.TextField()
 
     def get_absolute_url(self):
@@ -48,7 +60,7 @@ class Article(TimeStampedModel):
 
 class Comment(TimeStampedModel):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="comments")
-    author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
     content = models.TextField()
 
     def __unicode__(self):

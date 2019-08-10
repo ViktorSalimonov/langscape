@@ -2,17 +2,17 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from langscape.articles.models import Article, Comment, Member
+from langscape.articles.models import Article, Comment, UserProfile
 
 
-class MemberInline(admin.StackedInline):
-    model = Member
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
     can_delete = False
-    verbose_name_plural = 'member'
+    verbose_name_plural = 'userprofile'
 
 
 class UserAdmin(BaseUserAdmin):
-    inlines = (MemberInline,)
+    inlines = (UserProfileInline,)
 
 
 admin.site.unregister(User)

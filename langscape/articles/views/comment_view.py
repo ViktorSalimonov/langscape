@@ -5,7 +5,7 @@ from django.views.generic import CreateView, DeleteView
 from django.urls import reverse_lazy
 
 from langscape.articles.forms import CommentForm
-from langscape.articles.models import Article, Comment, Member
+from langscape.articles.models import Article, Comment, UserProfile
 
 
 class CommentActionMixin(object):
@@ -29,7 +29,7 @@ class CommentCreateView(LoginRequiredMixin, CommentActionMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.article = get_object_or_404(Article, pk=self.kwargs['pk'])
-        form.instance.author = get_object_or_404(Member, pk=self.request.user.id)
+        form.instance.author = get_object_or_404(UserProfile, pk=self.request.user.id)
         return super(CommentCreateView, self).form_valid(form)
 
 

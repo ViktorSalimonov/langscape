@@ -8,9 +8,10 @@ class ArticleListView(ListView):
 
     def get_queryset(self):
         queryset = super(ArticleListView, self).get_queryset()
+
         q = self.request.GET.get("q")
         if q:
-            return queryset.filter(title__icontains=q)
+            queryset = queryset.filter(title__icontains=q)
         return queryset
 
 

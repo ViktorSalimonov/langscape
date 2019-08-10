@@ -2,10 +2,16 @@
 
 {% block content %}
     <h2>Articles</h2>
-    Search article: {% include "articles/article_search.html" %}
+    <div>
+        Search article: {% include "articles/article_search.html" %}
+    </div>
+    <div>
+        Filter by difficulty:
+    </div>
     {% for article in object_list %}
         <h3><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></h3>
-        Written by {{ article.author }} at {{ article.created }}
+        <p>[{{ article.get_difficulty_display }}]</p>
+        <p>Written by {{ article.author }} at {{ article.created }}</p>
         <hr>
     {% endfor %}
 {% endblock content %}

@@ -22,20 +22,20 @@ class Member(models.Model):
 
 
 class Article(TimeStampedModel):
-    DIFFICULTY_ANY = 'any'
-    DIFFICULTY_BEGINNER = 'beg'
-    DIFFICULTY_MEDIUM = 'med'
-    DIFFICULTY_ADVANCED = 'adv'
+    __DIFFICULTY_ANY = 'any'
+    __DIFFICULTY_BEGINNER = 'beg'
+    __DIFFICULTY_MEDIUM = 'med'
+    __DIFFICULTY_ADVANCED = 'adv'
 
     DIFFICULTY_CHOICES = (
-        (DIFFICULTY_ANY, 'Any'),
-        (DIFFICULTY_BEGINNER, 'Beginner'),
-        (DIFFICULTY_MEDIUM, 'Medium'),
-        (DIFFICULTY_ADVANCED, 'Advanced')
+        (__DIFFICULTY_ANY, 'Any'),
+        (__DIFFICULTY_BEGINNER, 'Beginner'),
+        (__DIFFICULTY_MEDIUM, 'Medium'),
+        (__DIFFICULTY_ADVANCED, 'Advanced')
     )
     uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
     title = models.CharField(max_length=255)
-    difficulty = models.CharField(max_length=3, choices=DIFFICULTY_CHOICES, default=DIFFICULTY_ANY)
+    difficulty = models.CharField(max_length=3, choices=DIFFICULTY_CHOICES, default=__DIFFICULTY_ANY)
     author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True)
     content = models.TextField()
 

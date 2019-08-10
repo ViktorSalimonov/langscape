@@ -8,12 +8,12 @@
     </head>
     <body>
         <h1>LangScape</h1>
+        {% if user.is_authenticated %}
+            Hello, {{ user.username }}!
+        {% else %}
+            Hello, guest!
+        {% endif %}
         {% block content %}
-            {% if user.is_authenticated %}
-                Hello, {{ user.username }}!
-            {% else %}
-                Hello, guest!
-            {% endif %}
         {% endblock content %}
     </body>
 </html>

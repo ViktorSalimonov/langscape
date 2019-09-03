@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'langscape.articles',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -103,16 +102,9 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(ROOT_DIR, 'langscape', 'static'),
 )
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    )
-}

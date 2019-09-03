@@ -1,9 +1,10 @@
 import os
 
-from .base import *
+from config.settings.base import *
 
 
 DEBUG = True
+
 
 DATABASES = {
     'default': {
@@ -11,6 +12,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 INSTALLED_APPS += [
     'django_extensions',
